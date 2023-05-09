@@ -4,7 +4,6 @@ import 'moment/locale/fr';
 import { View, Text, Image } from "react-native";
 
 import styles from "./headerproduct";
-import { checkImageURL } from "../../../utils";
 
 const HeaderProduct = ({ logo, prodTitle, dateCreated }) => {
 
