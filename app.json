@@ -2,9 +2,28 @@
   "expo": {
     "scheme": "acme",
     "web": {
-      "bundler": "metro"
+      "bundler": "metro",
+      "cors": true
+    },
+    "android": {
+      "permissions": [
+        "ACCESS_NETWORK_STATE",
+        "INTERNET"
+      ]
+    },
+    "ios": {
+      "supportsTablet": true
     },
     "name": "testExpoReact",
-    "slug": "testExpoReact"
+    "slug": "testExpoReact",
+    "plugins": [
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
+        }
+      ]
+    ]
+
   }
 }
