@@ -5,7 +5,7 @@
 
 ## Résumé
 
-Le projet testExpoReact est une application mobile React Native créée avec Expo. Il comporte divers composants et fonctionnalités, notamment une fonction de recherche, une caméra, un lecteur de code-barres et une gestion des produits.
+Le projet PayeTonKawa est une application mobile React Native créée avec Expo. Il comporte divers composants et fonctionnalités, notamment une fonction de recherche, une caméra, un lecteur de code-barres et une gestion des produits.
 
 ## Structure du projet
 
