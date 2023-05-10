@@ -14,8 +14,8 @@
     "ios": {
       "supportsTablet": true
     },
-    "name": "testExpoReact",
-    "slug": "testExpoReact",
+    "name": "PayeTonKawa",
+    "slug": "PayeTonKawa",
     "plugins": [
       [
         "expo-barcode-scanner",

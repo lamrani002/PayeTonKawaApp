@@ -1,7 +1,7 @@
 ## PayeTonKawa App
 
 
-# Documentation du projet testExpoReact
+# Documentation du projet PayeTonKawa
 
 ## Résumé
 
@@ -98,4 +98,4 @@ package.json: Contient les dépendances, les scripts et les métadonnées du pro
 
 ## Récapitulatif
 
-Le projet testExpoReact est une application mobile React Native qui utilise divers composants, fonctionnalités et dépendances pour offrir une expérience utilisateur complète. Les dossiers app, assets, components, constants, hooks, styles, et utils travaillent ensemble pour créer cette application, avec des fichiers de configuration supplémentaires à la racine du projet pour gérer les dépendances, la configuration de Babel, et l'application Expo.
+Le projet PayeTonKawa est une application mobile React Native qui utilise divers composants, fonctionnalités et dépendances pour offrir une expérience utilisateur complète. Les dossiers app, assets, components, constants, hooks, styles, et utils travaillent ensemble pour créer cette application, avec des fichiers de configuration supplémentaires à la racine du projet pour gérer les dépendances, la configuration de Babel, et l'application Expo.
