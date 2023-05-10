@@ -8,11 +8,16 @@
     "android": {
       "permissions": [
         "ACCESS_NETWORK_STATE",
-        "INTERNET"
+        "INTERNET",
+        "android.permission.CAMERA"
       ]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access camera.",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
+      }
     },
     "name": "testExpoReact",
     "slug": "testExpoReact",
@@ -23,7 +28,17 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
         }
       ]
-    ]
-
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "19c0b790-3511-4f8b-a040-c95469f72ee1"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/19c0b790-3511-4f8b-a040-c95469f72ee1"
+    }
   }
 }
