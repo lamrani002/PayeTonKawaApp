@@ -29,5 +29,5 @@ export default function Index() {
             if (isValidToken) {
                 return <Redirect href="/home" />;
                 }
-            return <Redirect href="/started" />;
+                    return <Redirect href="/started" />;
 }
