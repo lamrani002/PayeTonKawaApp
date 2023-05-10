@@ -12,10 +12,10 @@ import {
 import {
   HeaderProduct,
   AboutProduct,
-  JobTabs,
   ScreenHeaderBtn,
   Tabs,
   VrAugmented,
+  
  
 } from "../../components";
 import { COLORS, icons, SIZES } from "../../constants";
@@ -23,11 +23,14 @@ import useFetch from "../../hook/useFetch";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+
+
 const tabs = ["A propos", "Voir en 3D"];
 
 const ProductDetails = () => {
   const params = useSearchParams();
   const router = useRouter();
+ 
  
   const [token, setToken] = useState(null);
 
@@ -62,7 +65,9 @@ const ProductDetails = () => {
 
       case "Voir en 3D":
         return (
-        <VrAugmented />
+          <View style={{ flex: 1, backgroundColor: '#fff'}}>
+          {/* <VrAugmented  color="#FF0000" /> */}
+        </View>
         );
 
       default:

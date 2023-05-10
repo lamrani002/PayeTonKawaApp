@@ -11,6 +11,7 @@ import chevronRight from '../assets/icons/chevron-right.png'
 import scanQr from '../assets/icons/scanQr.png'
 import Login from '../assets/icons/login.png'
 import profile from '../assets/icons/profile.png'
+import logout from '../assets/icons/logout.png'
 
 export default {
   heart,
@@ -25,5 +26,5 @@ export default {
   chevronRight,
   scanQr,
   Login,
-  profile
+  logout
 };

@@ -2,9 +2,8 @@ import { useState } from "react";
 import { SafeAreaView, ScrollView, View,Text, Alert } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
-import { COLORS, icons, images, SIZES } from "../constants";
+import { COLORS, icons, SIZES } from "../constants";
 import {
-  CustomersList,
   ProductsList,
   ScreenHeaderBtn,
   Welcome,
@@ -27,8 +26,8 @@ const Home = ({token}) => {
       ),
       headerRight: () => (
         <ScreenHeaderBtn
-          iconUrl={icons.profile}
-          dimension="100%"
+          iconUrl={icons.logout}
+          dimension="60%"
           handlePress={() => {
             Alert.alert(
               "Déconnexion",
