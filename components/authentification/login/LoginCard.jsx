@@ -29,8 +29,9 @@ export const LoginCard = () => {
     axios.post('https://apiepsierp.herokuapp.com/send_qr', data, config)
       .then(response => {
         //console.log(response.data);
-        
-        setMessage("E-mail envoyé avec succès !");
+        console.log('Email:', email); // Affiche l'email 
+        console.log('Password:', password); // Affiche le mot de pas
+        Alert.alert("E-mail envoyé avec succès !");
       })
       .catch(error => {
         console.error(error);
