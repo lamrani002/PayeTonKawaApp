@@ -15,7 +15,7 @@ const ProductSearch = () => {
     const [searchLoader, setSearchLoader] = useState(false);
     const [searchError, setSearchError] = useState(null);
   
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLTEwIiwiZXhwIjoxNjg0NzY4Njk5fQ.ygGMED5E7obQ-CA0RjG2iZS22Zr6OG3APyGa2gKhs5Y";
+    const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImV4cCI6MTY4NDg4MTgzM30.cqqB_-eFaC8nrQE9yMKAydET22JG9h-bNLOCasvThEk";
     
     const handleSearch = async () => {
         setSearchLoader(true);
@@ -24,7 +24,7 @@ const ProductSearch = () => {
         try {
             const options = {
                 method: "GET",
-                url: `https://e62c-2001-861-81-3860-296c-4376-b285-79ab.ngrok-free.app/products/search/${params.id}`,
+                url: `https://apiepsierp.herokuapp.com/products/search/${params.id}`,
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -53,7 +53,7 @@ const ProductSearch = () => {
       headerStyle: { backgroundColor: COLORS.lightWhite },
       headerShadowVisible: false,
       headerLeft: () => (
-        <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
+        <ScreenHeaderBtn iconUrl={icons.left} dimension="60%" />
       ),
       headerRight: () => (
         <ScreenHeaderBtn

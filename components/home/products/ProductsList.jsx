@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 
@@ -10,8 +10,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ProductsList = () => {
   const router = useRouter();
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLTEwIiwiZXhwIjoxNjg0NzY4Njk5fQ.ygGMED5E7obQ-CA0RjG2iZS22Zr6OG3APyGa2gKhs5Y";
-  const { data, isLoading, error, refetch } = useFetch("products",token);
+  const [token, setToken] = useState(null);
+  
+  useEffect(() => {
+    const getToken = async () => {
+    const storedToken = await AsyncStorage.getItem('token');
+    setToken(storedToken);
+   // console.log("Token récupéré:", storedToken);
+    };
+   getToken();
+  }, []);
+  const { data, isLoading, error, refetch } = useFetch("https://apiepsierp.herokuapp.com/products",token);
   
   return (
     <View style={styles.container}>

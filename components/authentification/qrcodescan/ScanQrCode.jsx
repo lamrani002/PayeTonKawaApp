@@ -17,7 +17,7 @@ const ScanQrCode = () => {
   const validateToken = async (token) => {
     const options = {
       method: 'GET',
-      url: 'https://e62c-2001-861-81-3860-296c-4376-b285-79ab.ngrok-free.app/validate-token',
+      url: 'https://apiepsierp.herokuapp.com/validate-token',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -25,7 +25,6 @@ const ScanQrCode = () => {
     try {
       const response = await axios(options)
       const data = await response.data;
-      console.log(response.data);
       return data.token;
     } catch (error) {
       console.error(error);

@@ -1,5 +1,5 @@
 import { Stack, useRouter, useSearchParams } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -20,6 +20,8 @@ import {
 } from "../../components";
 import { COLORS, icons, SIZES } from "../../constants";
 import useFetch from "../../hook/useFetch";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const tabs = ["A propos", "Voir en 3D"];
 
@@ -27,8 +29,18 @@ const ProductDetails = () => {
   const params = useSearchParams();
   const router = useRouter();
  
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLTEwIiwiZXhwIjoxNjg0NzY4Njk5fQ.ygGMED5E7obQ-CA0RjG2iZS22Zr6OG3APyGa2gKhs5Y";
-  const { data, isLoading, error, refetch } = useFetch(`products/${params.id}`,token);
+  const [token, setToken] = useState(null);
+
+   useEffect(() => {
+     const getToken = async () => {
+     const storedToken = await AsyncStorage.getItem('token');
+     setToken(storedToken);
+     console.log("Token récupéré:", storedToken);
+     };
+    getToken();
+   }, []);
+   const { data, isLoading, error, refetch } = useFetch(`https://apiepsierp.herokuapp.com/products/${params.id}`,token);
+  
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = useCallback(() => {
@@ -42,7 +54,7 @@ const ProductDetails = () => {
     switch (activeTab) {
       case "A propos":
         return (
-          <AboutProduct price={data.details.price ?? "Pas d'information"}
+          <AboutProduct price={data[0].details.price ?? "Pas d'information"}
           description={data.details.description} 
           stock={data.stock} 
           color={data.details.color}/>

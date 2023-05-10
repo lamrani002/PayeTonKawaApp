@@ -1,43 +1,73 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const useFetch = (endpoint,token) => {
+const useFetch = (url) => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // const options = {
-  //   method: "GET",
-  //   url: `https://ea6b-2001-861-81-3860-8ca9-7d47-a526-229b.ngrok-free.app/${endpoint}`,
-  //   headers: { Authorization: `Bearer ${token}`}
-  // };
-
-  const fetchData = async () => {
-    setIsLoading(true);
-
-    try {
-      const response = await axios.get(`https://e62c-2001-861-81-3860-296c-4376-b285-79ab.ngrok-free.app/${endpoint}`,{
-        headers: { Authorization: `Bearer ${token}`}
-
-      });
-     // console.log(response);
-      setData(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-      console.log(error)
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    fetchData();
+    const getToken = async () => {
+      try {
+        const value = await AsyncStorage.getItem('token');
+        if (value !== null) {
+          setToken(value);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getToken();
   }, []);
 
-  const refetch = () => {
-    setIsLoading(true);
-    fetchData();
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      const options = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      try {
+        const response = await axios.get(url, options);
+        setData(response.data);
+      } catch (error) {
+        setError(error);
+      }
+
+      setLoading(false);
+    };
+
+    if (token) {
+      fetchData();
+    }
+  }, [url, token]);
+
+  const refetch = async () => {
+    setLoading(true);
+    setError(null);
+
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.get(url, options);
+      setData(response.data);
+    } catch (error) {
+      setError(error);
+    }
+
+    setLoading(false);
   };
 
   return { data, isLoading, error, refetch };

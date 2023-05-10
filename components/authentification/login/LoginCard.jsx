@@ -1,9 +1,10 @@
 import React, { useState} from 'react'
-import { View,Text,TextInput, TouchableOpacity, Image, Button, Modal} from 'react-native'
+import { View,Text,TextInput, TouchableOpacity, Image, Button, Modal, Alert} from 'react-native'
 import { useRouter } from 'expo-router'
 import styles from './logincard.style'
 import { icons } from '../../../constants'
 import SendEmail from '../sendemail/SendEmail'
+import axios from 'axios'
 
 
 
@@ -11,42 +12,35 @@ import SendEmail from '../sendemail/SendEmail'
 export const LoginCard = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [message, setMessage] = useState("");
-  
+  const [message, setMessage] = useState('');
 
-  // email correcte
   const validateEmail = (email) => {
     const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     return regex.test(email);
   };
-  //// partie envoi email si l'utilisateur n'arrive pas a se connecter 
-  const handleSendEmail = (email, setMessage) => {
-    if (validateEmail(email)) {
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email })
-      };
-      fetch('https://example.com/api/send-email', requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          setMessage("E-mail envoyé avec succès !");
-        })
-        .catch(error => {
-          console.error(error);
-          setMessage("Une erreur s'est produite lors de l'envoi de l'e-mail.");
-        });
-    } else {
-      setMessage("Veuillez saisir une adresse e-mail valide.");
-    }
-  };
 
-  /// partie login /////
+  const handleSendEmail = async() => {
+    const data = { username: email, pwd: password }; 
+
+    const config = { headers: { 'Content-Type': 'application/json' }, }; 
+
+    axios.post('https://apiepsierp.herokuapp.com/send_qr', data, config)
+      .then(response => {
+        //console.log(response.data);
+        
+        setMessage("E-mail envoyé avec succès !");
+      })
+      .catch(error => {
+        console.error(error);
+        Alert.alert("Erreur", "Une erreur s'est produite lors de l'envoi de l'e-mail.");
+      });
+  };
+  console.log(email);
   const handleLogin = () => {
     // Logique de connexion à implémenter ici
-  }
+  };
     return (
     <View style={styles.container}>
       < Image 
@@ -59,7 +53,7 @@ export const LoginCard = () => {
           <TextInput
             style={styles.emailInput}
            
-            onChangeText={() => {}}
+            onChangeText={setEmail}
             placeholder='Entrer votre email'
           />
         </View>
@@ -67,24 +61,21 @@ export const LoginCard = () => {
         <View style={styles.emailContainer}>
         <View style={styles.emailWrapper}>
           <TextInput style={styles.emailInput}
-          onChangeText={() => {}}
+          onChangeText={setPassword}
           secureTextEntry={true}
           placeholder='Entrer votre mot de passe' 
           />
         </View>
         </View>
        
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText} onPress={() => setModalVisible(true)}>Demander Qr Code</Text>
-        </TouchableOpacity>
-       
+        <TouchableOpacity style={styles.button} onPress={handleSendEmail}>
+        <Text style={styles.buttonText} >Demander Qr Code</Text>
+      </TouchableOpacity>
+
+      <SendEmail visible={modalVisible} onClose={() => setModalVisible(false)} onSendEmail={() => {}} onCancel={() => setModalVisible(false)} />
+
           
-      <SendEmail 
-      visible={modalVisible}
-      onClose={() => setModalVisible(false)}
-      onSendEmail={(email) => handleSendEmail(email, setMessage)}
-      onCancel={() => setModalVisible(false)}
-      />
+      
      </View>
   )
 }
