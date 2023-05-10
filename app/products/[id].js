@@ -54,7 +54,7 @@ const ProductDetails = () => {
     switch (activeTab) {
       case "A propos":
         return (
-          <AboutProduct price={data[0].details.price ?? "Pas d'information"}
+          <AboutProduct price={data.details.price ?? "Pas d'information"}
           description={data.details.description} 
           stock={data.stock} 
           color={data.details.color}/>
