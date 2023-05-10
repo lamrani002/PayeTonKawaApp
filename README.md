@@ -12,11 +12,17 @@ Le projet testExpoReact est une application mobile React Native créée avec Exp
 Le projet est organisé en plusieurs dossiers principaux :
 
 app: Contient le fichier principal App.js et le dossier navigation pour la gestion de la navigation
+
 assets: Contient les images et les polices utilisées dans l'application
+
 components: Contient tous les composants utilisés dans l'application
+
 constants: Contient les fichiers liés aux constantes et aux thèmes de l'application
+
 hooks: Contient un hook personnalisé pour effectuer des requêtes HTTP
+
 styles: Contient les fichiers de style pour les différents composants
+
 utils: Contient un fichier utilitaire pour vérifier les URLs d'image
 
 ### Dossier app
@@ -24,9 +30,13 @@ utils: Contient un fichier utilitaire pour vérifier les URLs d'image
 Le dossier app contient les sous-dossiers et fichiers suivants:
 
 authentication: Contient les composants liés à l'authentification, y compris les écrans de connexion et d'inscription.
+
 products: Contient les composants liés aux produits, comme la liste des produits, les détails du produit, etc.
+
 search: Contient les composants liés à la recherche, tels que l'écran de recherche et les résultats de recherche.
+
 started: Contient les composants liés à l'écran de démarrage de l'application, comme StartedScreen.
+
 Fichiers complémentaires: Ces fichiers peuvent inclure des fichiers de configuration, des fichiers d'entrée, etc. pour aider à gérer et à organiser l'application.
 
 ### Dossier assets
@@ -38,10 +48,15 @@ Le dossier assets contient les images et les polices utilisées dans l'applicati
 Ce dossier contient les composants suivants :
 
 authentication: Contient les composants liés à l'authentification de l'utilisateur.
+
 common: Contient des composants réutilisables à travers l'application.
+
 Home: Composant pour afficher la page d'accueil de l'application
+
 ProductDetails: Composant pour afficher les détails d'un produit
+
 Search: Composant pour effectuer des recherches de produits
+
 StartedScreen: Composant pour afficher l'écran de démarrage de l'application
 
 ### Dossier constants
@@ -49,7 +64,9 @@ StartedScreen: Composant pour afficher l'écran de démarrage de l'application
 Ce dossier contient les fichiers liés aux constantes et aux thèmes de l'application :
 
 images.js: Exporte les images importées à partir du dossier assets/images
+
 index.js: Exporte toutes les constantes, icônes, thèmes et images
+
 theme.js: Contient les couleurs, les polices, les tailles et les ombres utilisées dans l'application
 
 ### Dossier hooks
