@@ -99,3 +99,14 @@ package.json: Contient les dépendances, les scripts et les métadonnées du pro
 ## Récapitulatif
 
 Le projet PayeTonKawa est une application mobile React Native qui utilise divers composants, fonctionnalités et dépendances pour offrir une expérience utilisateur complète. Les dossiers app, assets, components, constants, hooks, styles, et utils travaillent ensemble pour créer cette application, avec des fichiers de configuration supplémentaires à la racine du projet pour gérer les dépendances, la configuration de Babel, et l'application Expo.
+
+## Installation d'environement technique et déploiment sur expo.dev ainsi que la publication de l'application
+ 1) Installez Expo CLI : npm install -g expo-cli 
+ 2) Connectez-vous à Expo (si vous n'avez pas de compte, utilisez expo register pour en créer un) :expo login
+ 3) Clonez le dépôt Git de votre projet (remplacez url-du-depot par l'URL de votre dépôt Git) 
+ 4) Accédez au dossier du projet cloné et installer les dépendances: cd nom-du-dossier  npm install
+ 5) Configurez EAS Build en installant : npm install -g eas-cli
+ 6) Connecter vous et configurer EAS Build: eas login, eas build:configure 
+ 7) Exécutez l'application en mode développement sur le simulateur/emulateur ou un appareil (avec Expo Go): expo start
+ 8) Pour publier l'application avec EAS Build : eas build --platform android / eas build --platform ios
+ *Une fois la compilation terminée, vous recevrez un lien pour télécharger l'APK (Android) ou l'IPA (iOS). 
