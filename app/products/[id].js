@@ -51,6 +51,8 @@ const ProductDetails = () => {
 
 
   const displayTabContent = () => {
+    const customColor = data.details.color;
+    const customSize = { width: 200, height: 200 };
     switch (activeTab) {
       case "A propos":
         return (
@@ -62,10 +64,10 @@ const ProductDetails = () => {
 
       case "Voir en 3D":
         return (
-          <View style={{flex: 1, marginBottom: 4}}>
+          
 
-            <VrAugmented  />
-          </View>
+            <VrAugmented color={customColor} size={customSize} />
+          
         );
 
       default:

@@ -36,8 +36,8 @@
     "react-native-web": "~0.18.7",
     "tinycolor2": "^1.6.0",
     "expo-updates": "~0.16.4",
-    "expo-three": "3.2.1"
-
+    "expo-three": "3.2.1",
+    "expo-sensors": "~12.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

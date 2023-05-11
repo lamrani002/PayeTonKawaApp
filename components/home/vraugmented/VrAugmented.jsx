@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { Text, View, StyleSheet } from 'react-native';
+import { Camera } from 'expo-camera';
 
-const VrAugmented = () => {
+const VrAugmented = ({ color = 'gray', size = { width: 100, height: 50 } }) => {
   const [hasPermission, setHasPermission] = useState(null);
+  const [rotationZ, setRotationZ] = useState(0);
 
   useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
+    const interval = setInterval(() => {
+      setRotationZ((prevRotationZ) => prevRotationZ + 1);
+    }, 1000); // Change rotation every second (1000 ms)
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  useEffect(() => {
+    const getCameraPermissions = async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === 'granted');
     };
 
-    getBarCodeScannerPermissions();
+    getCameraPermissions();
   }, []);
 
   if (hasPermission === null) {
@@ -23,71 +33,88 @@ const VrAugmented = () => {
 
   return (
     <View style={styles.container}>
-      <BarCodeScanner style={StyleSheet.absoluteFillObject} />
+      <Camera style={styles.camera} />
       <View style={styles.cube}>
-        <View style={styles.triangle1} />
-        <View style={styles.triangle2} />
-        <View style={styles.triangle3} />
-        <View style={styles.triangle4} />
+        <View
+        style={[
+          styles.face,
+          {
+            width: size.width,
+            height: size.height,
+            borderColor: color,
+            transform: [
+              { perspective: 800 },
+              { rotateX: '45deg' },
+              { rotateY: '45deg' },
+              { rotateZ: `${rotationZ}deg` },
+            ],
+          },
+        ]}
+      />
+        <View
+          style={[
+            styles.face,
+            {
+              backgroundColor: color,
+              width: size.width,
+              height: size.height,
+              transform: [
+                { translateX: size.width / 2 },
+                { rotateY: '90deg' },
+              ],
+            },
+          ]}
+        />
+        <View
+          style={[
+            styles.face,
+            {
+              backgroundColor: color,
+              borderColor: color,
+              width: size.width,
+              height: size.height,
+              transform: [
+                { translateY: size.height / 2 },
+                { rotateX: '90deg' },
+              ],
+            },
+          ]}
+        />
       </View>
     </View>
   );
 };
 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  cube: {
-    width: 100,
-    height: 100,
-    position: 'absolute',
-  },
-  triangle1: {
-    borderTopWidth: 50,
-    borderTopColor: 'transparent',
-    borderRightWidth: 50,
-    borderRightColor: 'lime',
-    borderBottomWidth: 0,
-    borderBottomColor: 'transparent',
-    borderLeftWidth: 0,
-    borderLeftColor: 'transparent',
-  },
-  triangle2: {
-    borderTopWidth: 50,
-    borderTopColor: 'transparent',
-    borderRightWidth: 50,
-    borderRightColor: 'lime',
-    borderBottomWidth: 0,
-    borderBottomColor: 'transparent',
-    borderLeftWidth: 0,
-    borderLeftColor: 'transparent',
-    transform: [{ rotate: '90deg' }],
-  },
-  triangle3: {
-    borderTopWidth: 50,
-    borderTopColor: 'transparent',
-    borderRightWidth: 50,
-    borderRightColor: 'lime',
-    borderBottomWidth: 0,
-    borderBottomColor: 'transparent',
-    borderLeftWidth: 0,
-    borderLeftColor: 'transparent',
-    transform: [{ rotate: '180deg' }],
-  },
-  triangle4: {
-    borderTopWidth: 50,
-    borderTopColor: 'transparent',
-    borderRightWidth: 50,
-    borderRightColor: 'lime',
-    borderBottomWidth: 0,
-    borderBottomColor: 'transparent',
-    borderLeftWidth: 0,
-    borderLeftColor: 'transparent',
-    transform: [{ rotate: '270deg' }],
-  },
-});
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    camera: {
+      ...StyleSheet.absoluteFillObject,
+      flex: 1,
+    },
+    cube: {
+      width: 400,
+      height: 400,
+      position: 'relative',
+      justifyContent: 'center',
+      alignItems: 'center',
+
+      transform: [
+        { perspective: 500 },
+        { rotateX: '45deg' },
+        { rotateY: '45deg' },
+        { rotateZ: '20deg' },
+      ],
+    },
+    face: {
+      position: 'absolute',
+     
+      borderWidth: 100,
+    },
+  });
 
 export default VrAugmented;
