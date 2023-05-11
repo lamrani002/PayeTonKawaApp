@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 
 import styles from "./productslist.style";
 import { COLORS } from "../../../constants";
@@ -35,7 +35,30 @@ const ProductsList = () => {
         {isLoading ? (
           <ActivityIndicator size='large' color={COLORS.primary} />
         ) : error ? (
-          <Text>{error.message}</Text>
+            Alert.alert(
+              "Token Invalide ",
+              "Nous vous invitons a rescanner le bon Qr code !",
+              [
+                {
+                  text: "Annuler",
+                  style: "cancel",
+                },
+                {
+                  text: "Ok",
+                  onPress: async () => {
+                    // Supprimer le token de AsyncStorage
+                    try {
+                      await AsyncStorage.removeItem("token");
+                      router.push('/started');
+                      // Naviguer vers l'écran de connexion ou de bienvenue
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  },
+                },
+              ],
+              { cancelable: false }
+            )
         ) : (
           data?.map((product) => (
             <ProductCard

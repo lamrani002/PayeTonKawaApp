@@ -14,9 +14,17 @@ const ProductSearch = () => {
     const [searchResult, setSearchResult] = useState([]);
     const [searchLoader, setSearchLoader] = useState(false);
     const [searchError, setSearchError] = useState(null);
+    const [token, setToken] = useState(null);
+
   
-    const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImV4cCI6MTY4NDg4MTgzM30.cqqB_-eFaC8nrQE9yMKAydET22JG9h-bNLOCasvThEk";
-    
+    useEffect(() => {
+        const getToken = async () => {
+        const storedToken = await AsyncStorage.getItem('token');
+        setToken(storedToken);
+        console.log("Token récupéré:", storedToken);
+        };
+       getToken();
+      }, []);    
     const handleSearch = async () => {
         setSearchLoader(true);
         setSearchResult([])
@@ -53,7 +61,7 @@ const ProductSearch = () => {
       headerStyle: { backgroundColor: COLORS.lightWhite },
       headerShadowVisible: false,
       headerLeft: () => (
-        <ScreenHeaderBtn iconUrl={icons.left} dimension="60%" />
+        <ScreenHeaderBtn iconUrl={icons.left} dimension="60%" onPress={() => {router.back()}} />
       ),
       headerRight: () => (
         <ScreenHeaderBtn
