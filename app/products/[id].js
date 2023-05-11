@@ -62,7 +62,10 @@ const ProductDetails = () => {
 
       case "Voir en 3D":
         return (
-        <VrAugmented />
+          <View style={{flex: 1, marginBottom: 4}}>
+
+            <VrAugmented  />
+          </View>
         );
 
       default:
@@ -85,7 +88,36 @@ const ProductDetails = () => {
             />
           ),
           headerRight: () => (
-            <ScreenHeaderBtn iconUrl={icons.profile} dimension='100%' />
+            <ScreenHeaderBtn
+            iconUrl={icons.logout}
+            dimension="70%"
+            handlePress={() => {
+              Alert.alert(
+                "Déconnexion",
+                "Êtes-vous sûr de vouloir vous déconnecter ?",
+                [
+                  {
+                    text: "Annuler",
+                    style: "cancel",
+                  },
+                  {
+                    text: "Se déconnecter",
+                    onPress: async () => {
+                      // Supprimer le token de AsyncStorage
+                      try {
+                         await AsyncStorage.removeItem("token");
+                        router.push('/started');
+                        // Naviguer vers l'écran de connexion ou de bienvenue
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    },
+                  },
+                ],
+                { cancelable: false }
+              );
+            }}
+          />
           ),
           headerTitle: "",
         }}

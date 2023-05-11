@@ -65,8 +65,8 @@ const ProductSearch = () => {
       ),
       headerRight: () => (
         <ScreenHeaderBtn
-          iconUrl={icons.profile}
-          dimension="100%"
+          iconUrl={icons.logout}
+          dimension="70%"
           handlePress={() => {
             Alert.alert(
               "Déconnexion",
@@ -81,7 +81,7 @@ const ProductSearch = () => {
                   onPress: async () => {
                     // Supprimer le token de AsyncStorage
                     try {
-                      //const t = await AsyncStorage.removeItem("token");
+                       await AsyncStorage.removeItem("token");
                       router.push('/started');
                       // Naviguer vers l'écran de connexion ou de bienvenue
                     } catch (error) {

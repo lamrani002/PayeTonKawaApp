@@ -27,8 +27,8 @@ const Home = ({token}) => {
       ),
       headerRight: () => (
         <ScreenHeaderBtn
-          iconUrl={icons.profile}
-          dimension="100%"
+          iconUrl={icons.logout}
+          dimension="70%"
           handlePress={() => {
             Alert.alert(
               "Déconnexion",

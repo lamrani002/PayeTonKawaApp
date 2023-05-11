@@ -30,12 +30,35 @@ export const LoginCard = () => {
       .then(response => {
         //console.log(response.data);
         console.log('Email:', email); // Affiche l'email 
-        console.log('Password:', password); // Affiche le mot de pas
-        Alert.alert("E-mail envoyé avec succès !");
+        console.log('Password:', password); // Affiche le mot de pass        
+        Alert.alert(
+          "E-mail envoyé avec succès ! ",
+          "Verifiez votre boîte mail, ",
+          [
+            {
+              text: "Ok",
+              onPress: async () => {
+                router.push('/authentication/scanqrcode')
+              },
+            },
+          ],
+          { cancelable: false }
+        )
       })
       .catch(error => {
         console.error(error);
-        Alert.alert("Erreur", "Une erreur s'est produite lors de l'envoi de l'e-mail.");
+        Alert.alert(
+          "Erreur lors de l'envoi ! ",
+          "Une erreur s'est produite lors de l'envoi de l'e-mail. ",
+          [
+            {
+              text: "Ok",
+              onPress: async () => {
+                router.push('/login')              },
+            },
+          ],
+          { cancelable: false }
+        )
       });
   };
   console.log(email);
