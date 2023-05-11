@@ -54,7 +54,7 @@ export const LoginCard = () => {
             {
               text: "Ok",
               onPress: async () => {
-                router.push('/login')              },
+                router.push('/authentication/login')              },
             },
           ],
           { cancelable: false }
