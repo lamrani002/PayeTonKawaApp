@@ -19,8 +19,8 @@
         "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
       }
     },
-    "name": "PayeTonKawa",
-    "slug": "PayeTonKawa",
+    "name": "testExpoReact",
+    "slug": "testExpoReact",
     "plugins": [
       [
         "expo-barcode-scanner",
